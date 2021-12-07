@@ -1,0 +1,16 @@
+#Database Service
+services:
+  mysql:
+    container_name: reading-is-good-mysql
+    platform: linux/x86_64
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3388:3306"
+    environment:
+      MYSQL_DATABASE: readingisgood
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - /var/lib/reading-is-good
