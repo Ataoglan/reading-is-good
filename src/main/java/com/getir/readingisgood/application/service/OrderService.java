@@ -9,9 +9,12 @@ import com.getir.readingisgood.adapters.postgre.repository.UserRepository;
 import com.getir.readingisgood.domain.book.UpdateStockRequest;
 import com.getir.readingisgood.domain.order.CreateOrderRequest;
 import com.getir.readingisgood.domain.order.CreateOrderResponse;
+import com.getir.readingisgood.domain.order.GetOrderByDateRequest;
+import com.getir.readingisgood.domain.order.GetOrderRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -68,4 +71,10 @@ public class OrderService {
 
         return new CreateOrderResponse(false);
     }
+
+
+    public OrderEntity getOrder(GetOrderRequest getOrderRequest) {
+        return orderRepository.findById(getOrderRequest.getOrderId()).orElse(null);
+    }
+
 }
