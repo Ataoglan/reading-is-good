@@ -4,16 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "book")
 public class BookEntity extends BaseEntity {
@@ -26,10 +29,10 @@ public class BookEntity extends BaseEntity {
     private String author;
 
     @Column
+    @Version
     private int stock;
 
     @Column
     private double price;
-
 
 }

@@ -1,4 +1,12 @@
 spring:
-  profiles:
-    include: mysql-support
+  datasource:
+    url: jdbc:mysql://localhost:3388/readingisgood?reWriteBatchedInserts=true
+    user-name: admin
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
 
