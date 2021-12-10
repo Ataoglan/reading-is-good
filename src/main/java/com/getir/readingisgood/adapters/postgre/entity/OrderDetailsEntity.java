@@ -8,22 +8,28 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "order_details")
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "orders")
-public class OrderEntity extends BaseEntity{
+@AllArgsConstructor
+public class OrderDetailsEntity extends BaseEntity{
+    @Column
+    private int quantity;
+
+    @Column
+    private double unitPrice;
 
     @Column
     private double totalPrice;
 
-    @Column
-    private int totalQuantity;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @Column
+    private long bookId;
+
 }

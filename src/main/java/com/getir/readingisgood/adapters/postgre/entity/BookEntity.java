@@ -29,8 +29,10 @@ public class BookEntity extends BaseEntity {
     private String author;
 
     @Column
-    @Version
     private int stock;
+
+    @Version
+    private Integer version;
 
     @Column
     private double price;

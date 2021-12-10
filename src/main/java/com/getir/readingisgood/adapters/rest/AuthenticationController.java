@@ -4,6 +4,7 @@ import com.getir.readingisgood.application.service.UserService;
 import com.getir.readingisgood.domain.ApiResponse;
 import com.getir.readingisgood.domain.login.LoginRequest;
 import com.getir.readingisgood.domain.login.SignupRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,12 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("public/auth/")
+@RequiredArgsConstructor
 public class AuthenticationController {
     private final UserService userService;
-
-    public AuthenticationController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("v1/signup")
     private ApiResponse userSignup(@RequestBody @Validated SignupRequest signupRequest) {

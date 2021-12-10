@@ -10,6 +10,7 @@ import com.getir.readingisgood.domain.login.LoginResponse;
 import com.getir.readingisgood.domain.login.SignupRequest;
 import com.getir.readingisgood.domain.login.SignupResponse;
 import com.getir.readingisgood.domain.user.GetCustomerOrderRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,21 +21,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final AuthenticationService authenticationService;
     private final JwtTokenUtil jwtTokenUtil;
     private final OrderRepository orderRepository;
-    //private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, AuthenticationService authenticationService, JwtTokenUtil jwtTokenUtil,/*, PasswordEncoder passwordEncoder*/OrderRepository orderRepository) {
-        this.userRepository = userRepository;
-        this.authenticationService = authenticationService;
-        this.jwtTokenUtil = jwtTokenUtil;
-        //this.passwordEncoder = passwordEncoder;
-        this.orderRepository = orderRepository;
-    }
 
 
     public SignupResponse signUp(SignupRequest signupRequest) {
@@ -70,7 +63,7 @@ public class UserService implements UserDetailsService {
     public LoginResponse signIn(LoginRequest signinRequest) {
         try {
             UserDetails userDetails = loadUserByUsername(signinRequest.getEmail());
-            authenticationService.authenticate(signinRequest.getEmail(), signinRequest.getPassword());
+         //   authenticationService.authenticate(signinRequest.getEmail(), signinRequest.getPassword());
             if (!userDetails.getPassword().equals(signinRequest.getPassword())){
                 throw new RuntimeException("invalid username or password");
             }
@@ -81,11 +74,10 @@ public class UserService implements UserDetailsService {
     }
 
     public List<OrderEntity> getCustomerOrders(GetCustomerOrderRequest getCustomerOrderRequest) {
-        return userRepository.findById(getCustomerOrderRequest.getCustomerId()).map(user->{
-            List<OrderEntity> orderEntities = orderRepository.findOrderEntityByUser(user)
+        return userRepository.findById(getCustomerOrderRequest.getCustomerId()).map(user->
+             orderRepository.findOrderEntityByUser(user)
                     .stream().sorted(Comparator.comparing(OrderEntity::getCreatedDate))
-                    .collect(Collectors.toList());
-            return orderEntities;
-        }).orElseThrow(RuntimeException::new);
+                    .collect(Collectors.toList())
+        ).orElseThrow(RuntimeException::new);
     }
 }

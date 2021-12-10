@@ -4,10 +4,14 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @ConfigurationProperties(prefix = "jwt-security")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class JwtProperties {
     private String authHeader;
     private String authHeaderPrefix;

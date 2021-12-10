@@ -5,21 +5,19 @@ import com.getir.readingisgood.domain.ApiResponse;
 import com.getir.readingisgood.domain.order.CreateOrderRequest;
 import com.getir.readingisgood.domain.order.GetOrderByDateRequest;
 import com.getir.readingisgood.domain.order.GetOrderRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("secure/order/")
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
     @PostMapping("v1/createOrder")
-    private ApiResponse createOrder(@RequestBody @Validated CreateOrderRequest createOrderRequest){
-        return ApiResponse.success(orderService.createOrder(createOrderRequest));
+    private void createOrder(@RequestBody @Validated CreateOrderRequest createOrderRequest){
+        orderService.createOrder(createOrderRequest);
     }
 
     @GetMapping("v1/getOrder")
@@ -27,8 +25,4 @@ public class OrderController {
         return ApiResponse.success(orderService.getOrder(getOrderRequest));
     }
 
-    @GetMapping("v1/getOrderByDate")
-    private ApiResponse getOrderByDate(@RequestBody @Validated GetOrderByDateRequest getOrderByDateRequest){
-        return ApiResponse.success(orderService.getOrderByDate(getOrderByDateRequest));
-    }
 }

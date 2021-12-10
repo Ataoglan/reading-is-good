@@ -1,18 +1,14 @@
 package com.getir.readingisgood.domain.order;
 
-import com.getir.readingisgood.adapters.postgre.entity.BookEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class CreateOrderRequest {
-    private long userId;
-    private List<BookEntity> book;
-    private double totalPrice;
-    private int totalAmount;
+    private Map<Long, Integer> bookAndQuantity;
 }

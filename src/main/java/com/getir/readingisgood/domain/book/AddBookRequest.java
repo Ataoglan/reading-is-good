@@ -11,4 +11,5 @@ public class AddBookRequest {
     private String bookName;
     private String author;
     private double price;
+    private int stock;
 }

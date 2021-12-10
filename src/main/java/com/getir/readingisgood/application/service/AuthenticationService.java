@@ -9,11 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private AuthenticationManager authenticationManager;
-
-    public AuthenticationService(AuthenticationManager authenticationManager){
-        this.authenticationManager = authenticationManager;
-    }
+/*    private AuthenticationManager authenticationManager;
 
     public void authenticate(String username, String password) throws Exception {
         try {
@@ -21,5 +17,5 @@ public class AuthenticationService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
